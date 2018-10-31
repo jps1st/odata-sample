@@ -17,18 +17,12 @@ var model = {
     namespace: "demo",
     entityTypes: {
         "Product": {
-            "_id": {"type": "Edm.String", key: true},        
-            "ProductNum": {"type": "Edm.Int32"},
-            "Name": {"type": "Edm.String"},  
-            "Description": {"type": "Edm.String"}, 
-            "ReleaseDate": {"type": "Edm.DateTime"},  
-            "DiscontinuedDate": {"type": "Edm.DateTime"},  
-            "Rating": {"type": "Edm.Int32"},
-            "Price": {"type": "Edm.Double"}                    
+            "_id": {"type": "Edm.String", key: true},
+            "productName": {"type": "Edm.String"}                 
         }
     },   
     entitySets: {
-        "products": {
+        "pro": {
             entityType: "demo.Product"
         }
     }
@@ -38,7 +32,7 @@ var model = {
 var odataServer = ODataServer().model(model);
 
 
-var Adapter = require('simple-odata-server-mongodb')
+var Adapter = require('simple-odata-server-mongodb');
 MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true }, function(err, db) {
     odataServer.adapter(Adapter(function(cb) {
         cb(err, db.db('demo'));
