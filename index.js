@@ -1,6 +1,6 @@
 // Assign the required packages and dependencies to variables
 var express = require('express');
-var ODataServer = require("./simple-odata-server");
+var ODataServer = require("simple-odata-server");
 var MongoClient = require('mongodb').MongoClient;
 var cors = require("cors");
 
@@ -17,8 +17,14 @@ var model = {
     namespace: "demo",
     entityTypes: {
         "Product": {
-            "_id": {"type": "Edm.String", key: true},
-            "Name": {"type": "Edm.String"}                 
+            "_id": {"type": "Edm.String", key: true},        
+            "ProductNum": {"type": "Edm.Int32"},
+            "Name": {"type": "Edm.String"},  
+            "Description": {"type": "Edm.String"}, 
+            "ReleaseDate": {"type": "Edm.DateTime"},  
+            "DiscontinuedDate": {"type": "Edm.DateTime"},  
+            "Rating": {"type": "Edm.Int32"},
+            "Price": {"type": "Edm.Double"}                    
         }
     },   
     entitySets: {
